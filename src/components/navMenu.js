@@ -92,6 +92,14 @@ class NavMenu extends React.Component {
                   <div className='flex space-x-4'>
                     {this.props.user ? this.props.user.data.email : ''}
                   </div>
+                  <div className='sm:hidden pl-2' hidden={!this.props.user}>
+                    <button
+                      onClick={() => this.onBtLogout()}
+                      className='inline-flex items-center bg-red-500 border-0 py-1 px-3 focus:outline-none hover:bg-red-400 rounded text-white'
+                    >
+                      Logout
+                    </button>
+                  </div>
 
                   {this.props.user ? (
                     <Menu as='div' className='ml-3 relative'>
@@ -142,7 +150,7 @@ class NavMenu extends React.Component {
                     <Link to={{ pathname: '/login' }}>
                       <button
                         onClick={() => this.setState({ activePath: '/login' })}
-                        className='inline-flex items-center bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-400 rounded text-white mt-4 md:mt-0'
+                        className='inline-flex items-center bg-blue-500 border-0 py-1 px-3 focus:outline-none hover:bg-blue-400 rounded text-white'
                       >
                         Log In
                       </button>
