@@ -25,3 +25,28 @@ export const getProducts = (limit = '', offset = '') => {
       })
   }
 }
+
+export const getProductDetail = id => {
+  return dispatch => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_URL}getDetail`,
+        {},
+        {
+          params: {
+            secret: process.env.REACT_APP_API_SK,
+            id: id,
+          },
+        }
+      )
+      .then(res => {
+        dispatch({
+          type: 'GET_PRODUCTS',
+          payload: JSON.parse(res.data),
+        })
+      })
+      .catch(err => {
+        alert('Get data error:', err)
+      })
+  }
+}

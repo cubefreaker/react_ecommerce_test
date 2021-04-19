@@ -23,8 +23,7 @@ class Products extends React.Component {
                 <div key={item._id} className='lg:w-1/4 md:w-1/2 p-4 w-full'>
                   <Link
                     to={{
-                      pathname: '/product-detail',
-                      search: '?id=' + item._id,
+                      pathname: `/products/${item._id}`,
                     }}
                   >
                     <div className='block relative h-48 rounded overflow-hidden'>
@@ -37,7 +36,8 @@ class Products extends React.Component {
                   </Link>
                   <div className='mt-4'>
                     <h3 className='text-gray-500 text-xs tracking-widest title-font mb-1'>
-                      <FontAwesomeIcon icon={['fas', 'tags']} size="sm"/> {item.category}
+                      <FontAwesomeIcon icon={['fas', 'tags']} size='sm' />{' '}
+                      {item.category}
                     </h3>
                     <h2 className='text-gray-900 title-font text-lg font-medium'>
                       {item.name}

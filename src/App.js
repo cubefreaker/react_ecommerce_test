@@ -8,12 +8,17 @@ import Home from './pages/home'
 import Cart from './pages/cart'
 import Login from './pages/login'
 import Products from './pages/products'
+import ProductDetail from './pages/productDetail'
 import { authCheck } from './action/authAction'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTags } from '@fortawesome/free-solid-svg-icons'
+import {
+  faTags,
+  faHeart,
+  faShoppingCart,
+} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTags)
+library.add(faTags, faHeart, faShoppingCart)
 // app.currentUser.logOut()
 // const email = "hamzah.habibi@protonmail.com"
 // const password = "Pa55w0rd"
@@ -54,6 +59,7 @@ class App extends React.Component {
           <Route exact path='/products'>
             <Products />
           </Route>
+          <Route exact path='/products/:id' children={<ProductDetail />} />
           <Route exact path='/cart'>
             <Cart />
           </Route>
