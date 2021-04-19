@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getProducts } from '../action/productAction'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Products extends React.Component {
   constructor(props) {
@@ -29,14 +30,14 @@ class Products extends React.Component {
                     <div className='block relative h-48 rounded overflow-hidden'>
                       <img
                         alt='ecommerce'
-                        className='object-cover object-center w-full h-full block'
+                        className='transition duration-500 ease-in-out transform hover:scale-110 object-cover object-center w-full h-full block'
                         src={item.img}
                       ></img>
                     </div>
                   </Link>
                   <div className='mt-4'>
                     <h3 className='text-gray-500 text-xs tracking-widest title-font mb-1'>
-                      {item.category}
+                      <FontAwesomeIcon icon={['fas', 'tags']} size="sm"/> {item.category}
                     </h3>
                     <h2 className='text-gray-900 title-font text-lg font-medium'>
                       {item.name}

@@ -1,15 +1,37 @@
 import React from 'react'
 import './App.css'
 import { connect } from 'react-redux'
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom'
 
 import NavMenu from './components/navMenu'
+import Home from './pages/home'
 import Cart from './pages/cart'
+import Login from './pages/login'
 import Products from './pages/products'
-import * as Realm from 'realm-web'
+import { authCheck } from './action/authAction'
 
-const REALM_APP_ID = 'application-0-hlkrj'
-const app = new Realm.App({ id: REALM_APP_ID })
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTags } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTags)
+// app.currentUser.logOut()
+// const email = "hamzah.habibi@protonmail.com"
+// const password = "Pa55w0rd"
+
+// async function loginEmailPassword(email, password) {
+//   // Create an anonymous credential
+//   const credentials = Realm.Credentials.emailPassword(email, password);
+//   try {
+//     // Authenticate the user
+//     const user = await app.logIn(credentials);
+//     return user
+//   } catch(err) {
+//     console.error("Failed to log in", err);
+//   }
+// }
+// loginEmailPassword(email, password).then(user => {
+//   console.log("Successfully logged in!", user)
+// })
 
 class App extends React.Component {
   constructor(props) {
@@ -18,10 +40,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.authCheck()
+    this.props.authCheck()
   }
-
-  authCheck = () => {}
 
   render() {
     return (
@@ -29,7 +49,7 @@ class App extends React.Component {
         <NavMenu />
         <Switch>
           <Route exact path='/'>
-            <Products />
+            <Home />
           </Route>
           <Route exact path='/products'>
             <Products />
@@ -37,10 +57,13 @@ class App extends React.Component {
           <Route exact path='/cart'>
             <Cart />
           </Route>
+          <Route exact path='/login'>
+            <Login />
+          </Route>
         </Switch>
       </div>
     )
   }
 }
 
-export default connect(null, {})(App);
+export default connect(null, { authCheck })(App)
