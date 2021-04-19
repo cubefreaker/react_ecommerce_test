@@ -288,7 +288,7 @@ class Login extends React.Component {
               <div className='flex items-center justify-end'>
                 <a
                   onClick={() => this.onChangeType()}
-                  className='inline-block font-bold text-sm text-blue-500 hover:text-blue-400 pr-4'
+                  className='inline-block font-bold text-sm text-blue-500 hover:text-blue-400 pr-4 pl-4'
                   href='#'
                 >
                   {this.state.type == 'login' ? 'Sign Up' : 'Log In'}
