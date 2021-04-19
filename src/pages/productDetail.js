@@ -11,6 +11,7 @@ class ProductDetail extends React.Component {
     this.state = {
       id: this.props.match.params.id,
       qty: 1,
+      totalPrice: null,
     }
   }
 
@@ -19,16 +20,19 @@ class ProductDetail extends React.Component {
       this.props.getProductDetail(this.state.id)
   }
 
-  onChangeQty(val, type = null, stock) {
+  onChangeQty(val, type = null, pricing) {
     if (type == 'inc') {
-      if (val < stock) val++
+      if (val < pricing.stock) val++
     } else if (type == 'dec') {
       if (val > 1) val--
     } else {
-      if (val > stock) val = stock
+      if (val > pricing.stock) val = pricing.stock
     }
 
-    this.setState({ qty: val })
+    this.setState({
+      qty: val,
+      totalPrice: val * pricing.price,
+    })
   }
 
   render() {
@@ -73,7 +77,10 @@ class ProductDetail extends React.Component {
                 <span className='ml-auto text-gray-900'>
                   <button
                     onClick={() =>
-                      this.onChangeQty(this.state.qty, 'dec', product.stock)
+                      this.onChangeQty(this.state.qty, 'dec', {
+                        price: product.price,
+                        stock: product.stock,
+                      })
                     }
                     className='outline-none focus:outline-none'
                     // className=' bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 rounded-l cursor-pointer outline-none'
@@ -87,12 +94,18 @@ class ProductDetail extends React.Component {
                     name='custom-input-number'
                     value={this.state.qty}
                     onChange={e =>
-                      this.onChangeQty(e.target.value, null, product.stock)
+                      this.onChangeQty(e.target.value, null, {
+                        price: product.price,
+                        stock: product.stock,
+                      })
                     }
                   ></input>
                   <button
                     onClick={() =>
-                      this.onChangeQty(this.state.qty, 'inc', product.stock)
+                      this.onChangeQty(this.state.qty, 'inc', {
+                        price: product.price,
+                        stock: product.stock,
+                      })
                     }
                     className='outline-none focus:outline-none'
                     // className='bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 rounded-r cursor-pointer'
@@ -103,7 +116,9 @@ class ProductDetail extends React.Component {
               </div>
               <div className='flex'>
                 <span className='title-font font-medium text-2xl text-gray-900'>
-                  Rp.{product?.price.toLocaleString()}
+                  Rp.
+                  {this.state.totalPrice?.toLocaleString() ||
+                    product?.price.toLocaleString()}
                 </span>
                 <button className='flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded'>
                   <FontAwesomeIcon
