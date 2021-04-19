@@ -20,18 +20,19 @@ class ProductDetail extends React.Component {
       this.props.getProductDetail(this.state.id)
   }
 
-  onChangeQty(val, type = null, pricing) {
+  onChangeQty(qty, type = null, pricing) {
     if (type == 'inc') {
-      if (val < pricing.stock) val++
+      if (qty < pricing.stock) qty++
     } else if (type == 'dec') {
-      if (val > 1) val--
+      if (qty > 1) qty--
     } else {
-      if (val > pricing.stock) val = pricing.stock
+      if (!qty || qty <= 0) qty = 1
+      if (qty > pricing.stock) qty = pricing.stock
     }
 
     this.setState({
-      qty: val,
-      totalPrice: val * pricing.price,
+      qty: qty,
+      totalPrice: qty * pricing.price,
     })
   }
 
