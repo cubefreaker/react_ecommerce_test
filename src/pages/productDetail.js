@@ -12,6 +12,7 @@ class ProductDetail extends React.Component {
       id: this.props.match.params.id,
       qty: 1,
       totalPrice: null,
+      wishlisted: false,
     }
   }
 
@@ -128,8 +129,17 @@ class ProductDetail extends React.Component {
                   />
                   Add
                 </button>
-                <button className='rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4'>
-                  <FontAwesomeIcon icon={['fas', 'heart']} />
+                <button
+                  onClick={() => {
+                    this.setState({ wishlisted: !this.state.wishlisted })
+                  }}
+                  className='outline-none focus:outline-none rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center ml-4'
+                >
+                  <FontAwesomeIcon
+                    icon={['fas', 'heart']}
+                    color={this.state.wishlisted ? 'red' : ''}
+                    size={this.state.wishlisted ? 'lg' : ''}
+                  />
                 </button>
               </div>
             </div>
