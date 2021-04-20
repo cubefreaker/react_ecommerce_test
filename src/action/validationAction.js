@@ -32,6 +32,20 @@ export const validatePassword = password => {
         status: true,
         message: 'Please input password',
       }
+    } else if (!password.match(/^(?=.*\d)(?=.*[a-zA-Z])/)) {
+      type = 'VALIDATED'
+      valData = {
+        type: 'password',
+        status: true,
+        message: 'Password must contain number and alphabetical character',
+      }
+    } else if (password.length < 6) {
+      type = 'VALIDATED'
+      valData = {
+        type: 'password',
+        status: true,
+        message: 'Password length minimun 6 characters',
+      }
     }
     dispatch({
       type: type,
